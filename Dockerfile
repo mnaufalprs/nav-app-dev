@@ -8,9 +8,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm run dev
-RUN npm run start
-
 FROM php:8.3.1-fpm
 
 RUN apt-get update && apt-get install -y \
@@ -33,4 +30,4 @@ COPY --from=nodebuilder /app/public /var/www/html/public
 RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 8080
-CMD ["php-fpm"]
+CMD ["php-fpm"], [ "npm", "run", "dev"], [ "npm", "run", "start"]
